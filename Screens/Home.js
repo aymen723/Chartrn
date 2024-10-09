@@ -1,9 +1,13 @@
 import { View, Text, Button } from "react-native";
 import React, { useState } from "react";
 import { Chartcanvas } from "../Components/chart/Chartcanvas";
+import { Demo } from "../Components/chart/Demo";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ChartDemo } from "../Components/chart/ChartDemo";
 
 export default function Home() {
   const [chart, setchart] = useState(true);
+  const [atlas, setatlas] = useState(false);
 
   return (
     <View style={{ flex: 1 }}>
@@ -28,13 +32,23 @@ export default function Home() {
               setchart(true);
             }}
           />
+          <Button
+            title="Atlas"
+            onPress={() => {
+              setatlas(!atlas);
+            }}
+          />
         </View>
         <View
           style={{
             flex: 1,
           }}
         >
-          {chart ? <Chartcanvas /> : <Rbushcanvas />}
+          {atlas ? (
+            <ChartDemo />
+          ) : (
+            <>{chart ? <Chartcanvas /> : <Rbushcanvas />}</>
+          )}
         </View>
       </View>
     </View>
